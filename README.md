@@ -1,0 +1,2 @@
+# password-dealer
+Manages passwords
