@@ -3,4 +3,13 @@
   <groupId>password-dealer</groupId>
   <artifactId>password-dealer</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+    <dependency>
+		<groupId>org.json</groupId>
+		<artifactId>json</artifactId>
+		<version>20131018</version>
+    </dependency>
+  </dependencies>
+  
+  
 </project>
