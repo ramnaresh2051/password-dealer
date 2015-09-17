@@ -68,7 +68,7 @@ public final class PasswordManager {
     newAccountDetails = new AccountDetails(
       Constants.NEW_ACCOUNT_DETAILS, 
       new JLabel("This is card one"), 
-      Color.GRAY);
+      Color.DARK_GRAY);
     retreviewAccountDetails = new AccountDetails(
       Constants.RETRIEVE_ACCOUNT_DETAILS, 
       new JLabel("This is card two"), 
@@ -76,7 +76,7 @@ public final class PasswordManager {
     updateAccountDetails = new AccountDetails(
       Constants.UPDATE_ACCOUNT_DETAILS, 
       new JLabel("This is card three"), 
-      Color.CYAN);
+      Color.GRAY);
   }
   
   private static final class AccountDetails extends JPanel {
