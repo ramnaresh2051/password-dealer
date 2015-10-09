@@ -9,7 +9,9 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import com.ram.constants.Constants;
 import com.ram.db.DBManager;
 
 public class Utility {
@@ -77,5 +79,35 @@ public class Utility {
     }
     return jsonArray;
   }
+
+	public static void loadUserCredentials(JSONArray jsonArray,
+			String loginUserName, String loginPassword, String loginKey,
+			String idleTimeOut) {
+		try{
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				if (jsonObject.has(Constants.USER_CREDENTIAL)) {
+					loginUserName = jsonObject.getString(Constants.LOGIN_ACCOUNT_USER_NAME);
+					loginPassword = jsonObject.getString(Constants.LOGIN_ACCOUNT_USER_PASS);
+					loginKey = jsonObject.getString(Constants.LOGIN_ACCOUNT_USER_KEY);
+					idleTimeOut = jsonObject.getString(Constants.LOGIN_ACCOUNT_USER_TO);
+				}
+			}
+		}catch (JSONException jsonE) {
+			jsonE.printStackTrace();
+		}
+		
+	}
+
+	public static boolean checkTimeOut(String idleTimeOut, long lastActed) {
+		boolean isTimedOut = false;
+		long idle = Integer.parseInt(idleTimeOut) * 60 * 1000;
+		long timeDiff = System.currentTimeMillis() - lastActed;
+		
+		if (timeDiff > idle) {
+			isTimedOut = true;
+		}
+		return isTimedOut;
+	}
 }
 
