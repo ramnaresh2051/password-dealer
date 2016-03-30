@@ -239,7 +239,6 @@ public final class AccountDetails extends JPanel {
 				boolean isTimedOut = Util.checkTimeOut(PasswordManager.idleTimeOut, PasswordManager.idleTimeOutLong);
 				
 				if (!isTimedOut) {
-					PasswordManager.idleTimeOutLong = System.currentTimeMillis();
 					String accountType = accountTypeList.getSelectedItem()
 							.toString();
 					String accountDes = accountDescription.getText();
@@ -248,7 +247,7 @@ public final class AccountDetails extends JPanel {
 					System.out.println("Account type :" + accountType);
 					System.out.println("Account desc :" + accountDes);
 					System.out.println("User Name :" + uName);
-					System.out.println("Password :" + uPassword);
+//					System.out.println("Password :" + uPassword);
 					boolean fieldValidated = doValidationOfFields(accountType,
 							accountDes, uName, uPassword);
 					if (fieldValidated) {
@@ -261,10 +260,11 @@ public final class AccountDetails extends JPanel {
 									accountDes);
 							jsonObject.put(Constants.USER_NAME_BE, uName);
 							jsonObject.put(Constants.PASSWORD_BE, uPassword);
-							System.out.println("new user in json :"
-									+ jsonObject);
+//							System.out.println("new user in json :"
+//									+ jsonObject);
 							jsonArray.put(jsonObject);
 							DBManager.writeIntoFile(jsonArray.toString());
+							password.setText("");
 						} catch (JSONException e1) {
 							e1.printStackTrace();
 						}

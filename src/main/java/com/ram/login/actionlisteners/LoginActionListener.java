@@ -33,6 +33,7 @@ public class LoginActionListener implements ActionListener {
 				&& PasswordManager.loginPassword.equals(password.getText())) {
 			PasswordManager.loginStatus = true;
 			PasswordManager.idleTimeOutLong = System.currentTimeMillis();
+			password.setText("");
 			cardLayout.show(PasswordManager.cards,
 					PasswordManager.newAccountDetails.getName());
 		} else {
