@@ -57,7 +57,7 @@ public class UpdateAccountDetailsListener
       jsonObject.put(Constants.ACCOUNT_DESC_BE, accountDescSelected);
       jsonObject.put(Constants.USER_NAME_BE, userNameSelected);
       jsonObject.put(Constants.PASSWORD_BE, passwordSelected);
-      System.out.println("new user in json :" + jsonObject);
+//      System.out.println("new user in json :" + jsonObject);
       for (int i = 0; i < this.jsonArray.length(); i++)
       {
         JSONObject jsonObjectOne = this.jsonArray.getJSONObject(i);

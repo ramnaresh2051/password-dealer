@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -137,6 +138,7 @@ public class Util {
 	public static void createAndShowGUI() {
 		JFrame frame = new JFrame(Constants.PASSWORD_MANAGER);
 		frame.setSize(580, 280);
+		frame.setIconImage(new ImageIcon("/Users/ramnaresh/Documents/personal_docs/AA-350.jpg").getImage());
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(
