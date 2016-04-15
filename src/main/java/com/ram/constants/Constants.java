@@ -25,5 +25,6 @@ public class Constants
   public static String SUBMIT_DETAILS = "Insert Details";
   public static String LOGIN_ERROR_MSG = "UserId or Password is not correct";
   public static String TIME_OUT_ERROR_MSG = "Timed Out ...... Please login again.";
+  public static String INSERT_SUCCESS_MSG = "Inserted successfully";
   public static String[] ACCOUNT_TYPE_ARRAY = { "Select", "Social Networking", "Bank Account", "Mail Account", "Others" };
 }
