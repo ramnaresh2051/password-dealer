@@ -41,7 +41,7 @@ public class UpdateAcctTypeListListener
       try
       {
         List<String> list = findAccountDesc(accountSelected);
-        System.out.println("Account desc for selected account type" + list);
+//        System.out.println("Account desc for selected account type" + list);
         
         this.model.removeAllElements();
         for (String values : list) {

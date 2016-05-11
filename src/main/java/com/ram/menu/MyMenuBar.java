@@ -51,6 +51,17 @@ public class MyMenuBar extends JFrame{
 			}
 		});
 	      
+	      changePassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+//				JOptionPane.showMessageDialog(null, "Successfully Register");
+				cardLayout = (CardLayout)PasswordManager.cards.getLayout();
+				cardLayout.show(PasswordManager.cards,
+						PasswordManager.updateLoginPassword.getName());
+				
+			}
+		});
+	      
 	      profileItem.add(changePassword);
 	      profileItem.add(changeSecurityKey);
 	      profileItem.add(changeIdleTimeOut);

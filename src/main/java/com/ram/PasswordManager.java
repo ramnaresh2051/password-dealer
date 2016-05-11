@@ -23,6 +23,7 @@ public final class PasswordManager {
 	public static AccountDetails retreviewAccountDetails;
 	public static AccountDetails updateAccountDetails;
 	public static AccountDetails updateIdleTimeOut;
+	public static AccountDetails updateLoginPassword;
 	public static JSONArray jsonArray;
 	public static DefaultComboBoxModel<String> model = null;
 	public static boolean loginStatus = false;
@@ -47,7 +48,7 @@ public final class PasswordManager {
 		/**
 		 * 
 		 */
-		private static final long serialVersionUID = -5581923570712892833L;
+		private static final long serialVersionUID = 5581923570712892833L;
 		private static JButton newAccountDetailsBtn;
 		private static JButton retreviewAccountDetailsBtn;
 		private static JButton updateAccountDetailsBtn;

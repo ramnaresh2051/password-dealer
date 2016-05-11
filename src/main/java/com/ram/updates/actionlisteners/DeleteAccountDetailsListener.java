@@ -25,7 +25,6 @@ public class DeleteAccountDetailsListener implements ActionListener {
   private JTextField password;
   
   public DeleteAccountDetailsListener(JSONArray jsonArray, JComboBox<String> accountTypeList, JComboBox<String> accountTypeDescriptionList, JTextField userName, JTextField password) {
-    System.out.println("json :" + jsonArray);
     this.jsonArray = jsonArray;
     this.accountTypeList = accountTypeList;
     this.accountTypeDescriptionList = accountTypeDescriptionList;
@@ -46,7 +45,6 @@ public class DeleteAccountDetailsListener implements ActionListener {
     System.out.println("Account type :" + accountSelected);
     System.out.println("Account desc :" + accountDescSelected);
     System.out.println("User Name :" + userNameSelected);
-    System.out.println("Password :" + passwordSelected);
     
     if (accountSelected == "Select" || accountDescSelected == "Select") {
     	JOptionPane.showMessageDialog(null, "Please select Account Type and Account Descrption");
@@ -66,6 +64,7 @@ public class DeleteAccountDetailsListener implements ActionListener {
         	        }
         	      }
         	      DBManager.writeIntoFile(this.jsonArray.toString());
+        	      JOptionPane.showMessageDialog(null, "Deleted Successfully");
         	    }
         	    catch (JSONException jsonExp) {
         	    	jsonExp.printStackTrace();

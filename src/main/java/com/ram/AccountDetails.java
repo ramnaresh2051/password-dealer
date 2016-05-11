@@ -28,6 +28,7 @@ import com.ram.db.DBManager;
 import com.ram.login.actionlisteners.LoginActionListener;
 import com.ram.login.actionlisteners.MyRegisterActionListner;
 import com.ram.menu.actionlisteners.UpdateIdleTimeOutAcnListnr;
+import com.ram.menu.actionlisteners.UpdateLoginPasswdListnr;
 import com.ram.retrieve.actionlisteners.RetrieveAccountDetailsListener;
 import com.ram.updates.actionlisteners.DeleteAccountDetailsListener;
 import com.ram.updates.actionlisteners.UpdateAccountDetailsListener;
@@ -57,6 +58,9 @@ public final class AccountDetails extends JPanel {
 		}
 		if (Constants.UPDATE_IDLE_TIME_OUT.equals(name)) {
 			updateIdleTimeOut();
+		}
+		if (Constants.UPDATE_PASSWORD.equals(name)) {
+			updateLoginPassword();
 		}
 		if (Constants.NEW_ACCOUNT_DETAILS.equals(name)) {
 			createNewAccountPanel();
@@ -106,6 +110,64 @@ public final class AccountDetails extends JPanel {
 		update.addActionListener(new UpdateIdleTimeOutAcnListnr(jsonArray,
 				userName, password, 
 						 idleTimeOut
+						));
+		
+		JButton login = new JButton("Login");
+		login.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CardLayout cardLayout = (CardLayout) PasswordManager.cards.getLayout();
+				cardLayout.show(PasswordManager.cards, PasswordManager.loginCard.getName());
+			}
+		});
+		
+		panel.add(login);
+		panel.add(update);
+		add(panel);
+		
+	}
+	
+	private void updateLoginPassword() {
+		System.out.println("updateLoginPassword");
+		JPanel panel = new JPanel(new GridLayout(0, 2, 2, 2));
+		final JTextField userName = new JTextField(15);
+		final JPasswordField password = new JPasswordField(15);
+		final JPasswordField newPassword = new JPasswordField(15);
+		final JPasswordField retypeNewPassword = new JPasswordField(15);
+		
+		panel.add(new JLabel(Constants.USER_NAME_UI));
+		panel.add(userName);
+		panel.add(new JLabel(Constants.PASSWORD_UI));
+		panel.add(password);
+		
+		JLabel newPasswdLabel = new JLabel(Constants.NEW_PASSWORD_UI);
+		newPasswdLabel.setToolTipText("Enter New Password");
+		panel.add(newPasswdLabel);
+		panel.add(newPassword);
+		
+		JLabel retypeNewPasswdLabel = new JLabel(Constants.RETYPE_NEW_PASSWORD_UI);
+		retypeNewPasswdLabel.setToolTipText("Retype New Password");
+		panel.add(retypeNewPasswdLabel);
+		panel.add(retypeNewPassword);
+		
+		retypeNewPassword.addFocusListener(new FocusListener() {
+			
+			public void focusLost(FocusEvent e) {
+				
+				
+			}
+			
+			public void focusGained(FocusEvent e) {
+				retypeNewPassword.setText("");
+			}
+		});
+		
+		
+		
+		
+		JButton update = new JButton("Update");
+		update.addActionListener(new UpdateLoginPasswdListnr(jsonArray,
+				userName, password, newPassword,
+				retypeNewPassword
 						));
 		
 		JButton login = new JButton("Login");
@@ -247,7 +309,6 @@ public final class AccountDetails extends JPanel {
 					System.out.println("Account type :" + accountType);
 					System.out.println("Account desc :" + accountDes);
 					System.out.println("User Name :" + uName);
-//					System.out.println("Password :" + uPassword);
 					boolean fieldValidated = doValidationOfFields(accountType,
 							accountDes, uName, uPassword);
 					if (fieldValidated) {
@@ -265,6 +326,7 @@ public final class AccountDetails extends JPanel {
 							jsonArray.put(jsonObject);
 							DBManager.writeIntoFile(jsonArray.toString());
 							password.setText("");
+							JOptionPane.showMessageDialog(null, "Record inserted Successfully");
 						} catch (JSONException e1) {
 							e1.printStackTrace();
 						}

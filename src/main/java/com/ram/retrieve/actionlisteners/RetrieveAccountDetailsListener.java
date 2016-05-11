@@ -30,7 +30,6 @@ public class RetrieveAccountDetailsListener
   
   public RetrieveAccountDetailsListener(JSONArray jsonArray, JComboBox<String> accountTypeList, JTextField accountDescription, JTextField userName, JTextField password)
   {
-    System.out.println("json :" + jsonArray);
     this.jsonArray = jsonArray;
     this.accountTypeList = accountTypeList;
     this.accountDescription = accountDescription;
@@ -48,7 +47,6 @@ public class RetrieveAccountDetailsListener
     System.out.println("Account type :" + accountType);
     System.out.println("Account desc :" + this.accountDescription.getText());
     System.out.println("User Name :" + this.userName.getText());
-//    System.out.println("Password :" + this.password.getText());
     
     if(Util.checkTimeOut(PasswordManager.idleTimeOut, PasswordManager.idleTimeOutLong)) {
     	 return;
@@ -140,7 +138,6 @@ public class RetrieveAccountDetailsListener
       sb.append("Please select any option to search");
     }
     JOptionPane.showMessageDialog(null, sb);
-//    PasswordManager.idleTimeOutLong = System.currentTimeMillis();
   }
   
   private List<AccountDetailsFields> getAcctDetailsForUserName(String uName)
@@ -152,11 +149,11 @@ public class RetrieveAccountDetailsListener
       {
         AccountDetailsFields accountDetailsFields = new AccountDetailsFields();
         boolean shouldAdd = false;
-        System.out.println(this.jsonArray.getJSONObject(i));
+//        System.out.println(this.jsonArray.getJSONObject(i));
         JSONObject jsonObject = this.jsonArray.getJSONObject(i);
         if (jsonObject.has(Constants.ACCOUNT_TYPE_BE))
         {
-          System.out.println("Timing : " + i);
+//          System.out.println("Timing : " + i);
           if (jsonObject.get(Constants.USER_NAME_BE).toString().contains(uName)) {
             shouldAdd = true;
           }
@@ -187,11 +184,11 @@ public class RetrieveAccountDetailsListener
       {
         AccountDetailsFields accountDetailsFields = new AccountDetailsFields();
         boolean shouldAdd = false;
-        System.out.println(this.jsonArray.getJSONObject(i));
+//        System.out.println(this.jsonArray.getJSONObject(i));
         JSONObject jsonObject = this.jsonArray.getJSONObject(i);
         if (jsonObject.has(Constants.ACCOUNT_TYPE_BE))
         {
-          System.out.println("Timing : " + i);
+//          System.out.println("Timing : " + i);
           if (jsonObject.get(Constants.ACCOUNT_TYPE_BE).toString().contains(accountType)) {
             shouldAdd = true;
           }
@@ -222,11 +219,11 @@ public class RetrieveAccountDetailsListener
       {
         AccountDetailsFields accountDetailsFields = new AccountDetailsFields();
         boolean shouldAdd = false;
-        System.out.println(this.jsonArray.getJSONObject(i));
+//        System.out.println(this.jsonArray.getJSONObject(i));
         JSONObject jsonObject = this.jsonArray.getJSONObject(i);
         if (jsonObject.has(Constants.ACCOUNT_DESC_BE))
         {
-          System.out.println("Timing : " + i);
+//          System.out.println("Timing : " + i);
           if ((jsonObject.get(Constants.ACCOUNT_DESC_BE).toString().contains(accountDesc)) && 
             (jsonObject.get(Constants.USER_NAME_BE).toString().contains(uName))) {
             shouldAdd = true;
@@ -258,11 +255,11 @@ public class RetrieveAccountDetailsListener
       {
         AccountDetailsFields accountDetailsFields = new AccountDetailsFields();
         boolean shouldAdd = false;
-        System.out.println(this.jsonArray.getJSONObject(i));
+//        System.out.println(this.jsonArray.getJSONObject(i));
         JSONObject jsonObject = this.jsonArray.getJSONObject(i);
         if (jsonObject.has(Constants.ACCOUNT_DESC_BE))
         {
-          System.out.println("Timing : " + i);
+//          System.out.println("Timing : " + i);
           if (jsonObject.get(Constants.ACCOUNT_DESC_BE).toString().contains(accountDesc)) {
             shouldAdd = true;
           }
@@ -293,11 +290,11 @@ public class RetrieveAccountDetailsListener
       {
         AccountDetailsFields accountDetailsFields = new AccountDetailsFields();
         boolean shouldAdd = false;
-        System.out.println(this.jsonArray.getJSONObject(i));
+//        System.out.println(this.jsonArray.getJSONObject(i));
         JSONObject jsonObject = this.jsonArray.getJSONObject(i);
         if (jsonObject.has(Constants.ACCOUNT_TYPE_BE))
         {
-          System.out.println("Timing : " + i);
+//          System.out.println("Timing : " + i);
           if ((jsonObject.get(Constants.ACCOUNT_TYPE_BE).toString().contains(accountType)) && 
             (jsonObject.get(Constants.USER_NAME_BE).toString().contains(userName))) {
             shouldAdd = true;
@@ -329,11 +326,11 @@ public class RetrieveAccountDetailsListener
       {
         AccountDetailsFields accountDetailsFields = new AccountDetailsFields();
         boolean shouldAdd = false;
-        System.out.println(this.jsonArray.getJSONObject(i));
+//        System.out.println(this.jsonArray.getJSONObject(i));
         JSONObject jsonObject = this.jsonArray.getJSONObject(i);
         if (jsonObject.has(Constants.ACCOUNT_TYPE_BE))
         {
-          System.out.println("Timing : " + i);
+//          System.out.println("Timing : " + i);
           if ((jsonObject.get(Constants.ACCOUNT_TYPE_BE).toString().contains(accountType)) && 
             (jsonObject.get(Constants.ACCOUNT_DESC_BE).toString().contains(accountDesc))) {
             shouldAdd = true;
@@ -365,11 +362,11 @@ public class RetrieveAccountDetailsListener
       {
         AccountDetailsFields accountDetailsFields = new AccountDetailsFields();
         boolean shouldAdd = false;
-        System.out.println(this.jsonArray.getJSONObject(i));
+//        System.out.println(this.jsonArray.getJSONObject(i));
         JSONObject jsonObject = this.jsonArray.getJSONObject(i);
         if (jsonObject.has(Constants.ACCOUNT_TYPE_BE))
         {
-          System.out.println("Timing : " + i);
+//          System.out.println("Timing : " + i);
           if ((jsonObject.get(Constants.ACCOUNT_TYPE_BE).toString().contains(accountType)) && 
             (jsonObject.get(Constants.ACCOUNT_DESC_BE).toString().contains(accountDesc)) && 
             (jsonObject.get(Constants.USER_NAME_BE).toString().contains(userName))) {

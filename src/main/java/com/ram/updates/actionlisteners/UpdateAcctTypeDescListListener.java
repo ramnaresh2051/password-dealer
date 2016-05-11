@@ -27,7 +27,6 @@ public class UpdateAcctTypeDescListListener
   
   public UpdateAcctTypeDescListListener(JSONArray jsonArray, JComboBox<String> accountTypeList, JComboBox<String> accountTypeDescriptionList, JTextField userName, JTextField password)
   {
-    System.out.println("json :" + jsonArray);
     this.jsonArray = jsonArray;
     this.accountTypeList = accountTypeList;
     this.accountTypeDescriptionList = accountTypeDescriptionList;
@@ -49,7 +48,6 @@ public class UpdateAcctTypeDescListListener
       try
       {
         AccountDetailsFields fields = findAccountDetails(accountSelected, accountDescSelected);
-        System.out.println("fields : " + fields);
         this.userName.setText(fields.getUsername());
         this.userName.setEditable(false);
         this.password.setText(fields.getPassword());

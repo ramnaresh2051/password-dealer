@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.PrintStream;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import org.json.JSONArray;
@@ -27,7 +28,6 @@ public class UpdateAccountDetailsListener
   
   public UpdateAccountDetailsListener(JSONArray jsonArray, JComboBox<String> accountTypeList, JComboBox<String> accountTypeDescriptionList, JTextField userName, JTextField password)
   {
-    System.out.println("json :" + jsonArray);
     this.jsonArray = jsonArray;
     this.accountTypeList = accountTypeList;
     this.accountTypeDescriptionList = accountTypeDescriptionList;
@@ -49,15 +49,12 @@ public class UpdateAccountDetailsListener
     System.out.println("Account type :" + accountSelected);
     System.out.println("Account desc :" + accountDescSelected);
     System.out.println("User Name :" + userNameSelected);
-    System.out.println("Password :" + passwordSelected);
     try
     {
       JSONObject jsonObject = new JSONObject();
       jsonObject.put(Constants.ACCOUNT_TYPE_BE, accountSelected);
       jsonObject.put(Constants.ACCOUNT_DESC_BE, accountDescSelected);
       jsonObject.put(Constants.USER_NAME_BE, userNameSelected);
-      jsonObject.put(Constants.PASSWORD_BE, passwordSelected);
-//      System.out.println("new user in json :" + jsonObject);
       for (int i = 0; i < this.jsonArray.length(); i++)
       {
         JSONObject jsonObjectOne = this.jsonArray.getJSONObject(i);
@@ -72,6 +69,7 @@ public class UpdateAccountDetailsListener
         }
       }
       DBManager.writeIntoFile(this.jsonArray.toString());
+      JOptionPane.showMessageDialog(null, "Updated successfully");
     }
     catch (JSONException e1)
     {

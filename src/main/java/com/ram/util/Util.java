@@ -165,6 +165,9 @@ public class Util {
 		PasswordManager.updateAccountDetails = new AccountDetails(
 				Constants.UPDATE_ACCOUNT_DETAILS, new JLabel(
 						"This is card three"), Color.GRAY);
+		PasswordManager.updateLoginPassword = new AccountDetails(
+				Constants.UPDATE_PASSWORD, new JLabel(
+						"This is card update login password"), Color.WHITE);
 		PasswordManager.updateIdleTimeOut = new AccountDetails(
 				Constants.UPDATE_IDLE_TIME_OUT, new JLabel(
 						"This is card update time out"), Color.WHITE);
