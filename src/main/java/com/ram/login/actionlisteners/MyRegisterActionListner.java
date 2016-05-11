@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.ram.PasswordManager;
 import com.ram.constants.Constants;
 import com.ram.db.DBManager;
 
@@ -43,26 +44,30 @@ public class MyRegisterActionListner implements ActionListener {
 
 		String msg = doValidation(uName, uPass, uCpass, security, idle);
 		
-		if (StringUtils.isEmpty(msg)) {
-			try {
-				JSONObject jsonObject = new JSONObject();
-				jsonObject.put(Constants.LOGIN_ACCOUNT_USER_NAME,
-						uName);
-				jsonObject.put(Constants.LOGIN_ACCOUNT_USER_PASS,
-						uPass);
-				jsonObject.put(Constants.LOGIN_ACCOUNT_USER_KEY, security);
-				jsonObject.put(Constants.LOGIN_ACCOUNT_USER_TO, idle);
-				jsonObject.put(Constants.USER_CREDENTIAL, true);
-				jsonArray.put(jsonObject);
-				DBManager.writeIntoFile(jsonArray.toString());
-				JOptionPane.showMessageDialog(null, "Successfully Register");
-			} catch (JSONException e1) {
-				e1.printStackTrace();
+		if (!PasswordManager.isRegistered) {
+			if (StringUtils.isEmpty(msg)) {
+				try {
+					JSONObject jsonObject = new JSONObject();
+					jsonObject.put(Constants.LOGIN_ACCOUNT_USER_NAME,
+							uName);
+					jsonObject.put(Constants.LOGIN_ACCOUNT_USER_PASS,
+							uPass);
+					jsonObject.put(Constants.LOGIN_ACCOUNT_USER_KEY, security);
+					jsonObject.put(Constants.LOGIN_ACCOUNT_USER_TO, idle);
+					jsonObject.put(Constants.USER_CREDENTIAL, true);
+					jsonObject.put(Constants.IS_REGISTERED, "true");
+					jsonArray.put(jsonObject);
+					DBManager.writeIntoFile(jsonArray.toString());
+					JOptionPane.showMessageDialog(null, "Successfully Registered \nPlease close and open app again");
+				} catch (JSONException e1) {
+					e1.printStackTrace();
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, msg);
 			}
 		} else {
-			JOptionPane.showMessageDialog(null, msg);
+			JOptionPane.showMessageDialog(null, "You have already registered");
 		}
-
 	}
 
 	private String doValidation(String uName, String uPass, String uCpass,

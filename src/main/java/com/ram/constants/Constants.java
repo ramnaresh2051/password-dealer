@@ -25,6 +25,7 @@ public class Constants
   public static String LOGIN_ACCOUNT_USER_PASS = "LoginAccountUserPass";
   public static String LOGIN_ACCOUNT_USER_KEY = "LoginAccountUserKey";
   public static String LOGIN_ACCOUNT_USER_TO = "LoginAccountUserTO";
+  public static String IS_REGISTERED = "isRegistered";
   public static String SUBMIT_DETAILS = "Insert Details";
   public static String LOGIN_ERROR_MSG = "UserId or Password is not correct";
   public static String PASSWD_CHANGE_ERROR_MSG = "New Password and retype new Password does not match";

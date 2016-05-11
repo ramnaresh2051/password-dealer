@@ -31,6 +31,7 @@ public final class PasswordManager {
 	public static String loginPassword = null;
 	public static String loginKey = null;
 	public static String idleTimeOut = null;
+	public static boolean isRegistered;
 	public static long idleTimeOutLong = System.currentTimeMillis();
 
 	public static void main(String[] args) {

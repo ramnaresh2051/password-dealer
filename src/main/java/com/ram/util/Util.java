@@ -103,6 +103,7 @@ public class Util {
 					PasswordManager.loginPassword = jsonObject.getString(Constants.LOGIN_ACCOUNT_USER_PASS);
 					PasswordManager.loginKey = jsonObject.getString(Constants.LOGIN_ACCOUNT_USER_KEY);
 					PasswordManager.idleTimeOut = jsonObject.getString(Constants.LOGIN_ACCOUNT_USER_TO);
+					PasswordManager.isRegistered = Boolean.parseBoolean(jsonObject.getString(Constants.IS_REGISTERED));
 				}
 			}
 		}catch (JSONException jsonE) {
