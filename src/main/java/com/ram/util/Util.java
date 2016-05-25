@@ -1,8 +1,10 @@
 package com.ram.util;
 
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -12,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -104,6 +107,10 @@ public class Util {
 					PasswordManager.loginKey = jsonObject.getString(Constants.LOGIN_ACCOUNT_USER_KEY);
 					PasswordManager.idleTimeOut = jsonObject.getString(Constants.LOGIN_ACCOUNT_USER_TO);
 					PasswordManager.isRegistered = Boolean.parseBoolean(jsonObject.getString(Constants.IS_REGISTERED));
+					PasswordManager.SEC_QUES_1 = jsonObject.getString(Constants.SEC_QUES_1);
+					PasswordManager.SEC_QUES_2 = jsonObject.getString(Constants.SEC_QUES_2);
+					PasswordManager.SEC_ANS_1 = jsonObject.getString(Constants.SEC_ANS_1);
+					PasswordManager.SEC_ANS_2 = jsonObject.getString(Constants.SEC_ANS_2);
 				}
 			}
 		}catch (JSONException jsonE) {
@@ -138,9 +145,8 @@ public class Util {
 	
 	public static void createAndShowGUI() {
 		JFrame frame = new JFrame(Constants.PASSWORD_MANAGER);
-		frame.setSize(580, 280);
+		frame.setSize(696, 400);
 		frame.setIconImage(new ImageIcon("/Users/ramnaresh/Documents/personal_docs/AA-350.jpg").getImage());
-
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(
 				new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
@@ -153,25 +159,47 @@ public class Util {
 		frame.setVisible(true);
 	}
 	
+	public static void showProgressBar() {
+		JFrame frame = new JFrame(Constants.PASSWORD_MANAGER);
+		frame.setSize(300, 24);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setUndecorated(true);
+		Container content = frame.getContentPane();
+	    JProgressBar progressBar = new JProgressBar();
+	    progressBar.setIndeterminate(true);
+	    content.add(progressBar, BorderLayout.CENTER);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+	}
+	
 	public static void createCards() {
 		PasswordManager.registerCard = new AccountDetails(Constants.REGISTER, new JLabel(
-				"This is a register card"), Color.WHITE);
+				"This is a register card"), Color.ORANGE);
 		PasswordManager.loginCard = new AccountDetails(Constants.LOGIN, new JLabel(
-				"This is card login"), Color.WHITE);
+				"This is card login"), MyColor.getCommonColor());
 		PasswordManager.newAccountDetails = new AccountDetails(Constants.NEW_ACCOUNT_DETAILS,
 				new JLabel("This is card one"), Color.DARK_GRAY);
 		PasswordManager.retreviewAccountDetails = new AccountDetails(
 				Constants.RETRIEVE_ACCOUNT_DETAILS, new JLabel(
-						"This is card two"), Color.LIGHT_GRAY);
+						"This is card two"), MyColor.getCommonColor());
 		PasswordManager.updateAccountDetails = new AccountDetails(
 				Constants.UPDATE_ACCOUNT_DETAILS, new JLabel(
 						"This is card three"), Color.GRAY);
 		PasswordManager.updateLoginPassword = new AccountDetails(
 				Constants.UPDATE_PASSWORD, new JLabel(
-						"This is card update login password"), Color.WHITE);
+						"This is card update login password"), MyColor.getCommonColor());
 		PasswordManager.updateIdleTimeOut = new AccountDetails(
 				Constants.UPDATE_IDLE_TIME_OUT, new JLabel(
-						"This is card update time out"), Color.WHITE);
+						"This is card update time out"), MyColor.getCommonColor());
+		PasswordManager.FORGOT_PASSWORD = new AccountDetails(
+				Constants.FORGOT_PASSWORD, new JLabel(
+						"This is card update time out"), MyColor.getCommonColor());
+	}
+}
+
+class MyColor {
+	public static java.awt.Color getCommonColor() {
+		return new java.awt.Color(196, 119, 57);
 	}
 }
 

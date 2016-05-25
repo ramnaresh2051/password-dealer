@@ -1,18 +1,24 @@
 package com.ram;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JWindow;
 import javax.swing.SwingUtilities;
 
 import org.json.JSONArray;
 
+import com.ram.loading.screen.LoadingScreen;
 import com.ram.util.Util;
 
 public final class PasswordManager {
@@ -24,6 +30,7 @@ public final class PasswordManager {
 	public static AccountDetails updateAccountDetails;
 	public static AccountDetails updateIdleTimeOut;
 	public static AccountDetails updateLoginPassword;
+	public static AccountDetails FORGOT_PASSWORD;
 	public static JSONArray jsonArray;
 	public static DefaultComboBoxModel<String> model = null;
 	public static boolean loginStatus = false;
@@ -31,10 +38,16 @@ public final class PasswordManager {
 	public static String loginPassword = null;
 	public static String loginKey = null;
 	public static String idleTimeOut = null;
+	public static String SEC_QUES_1 = null;
+	public static String SEC_QUES_2 = null;
+	public static String SEC_ANS_1 = null;
+	public static String SEC_ANS_2 = null;
 	public static boolean isRegistered;
 	public static long idleTimeOutLong = System.currentTimeMillis();
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
+		LoadingScreen ls = new LoadingScreen();
+		Thread.sleep(2000);
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				jsonArray = Util.onStartUp();
@@ -42,6 +55,7 @@ public final class PasswordManager {
 				Util.createAndShowGUI();
 			}
 		});
+		ls.stop();
 	}
 
 

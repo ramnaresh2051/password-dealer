@@ -17,5 +17,6 @@ public final class CardPanel extends JPanel {
 		add(PasswordManager.registerCard, PasswordManager.registerCard.getName());
 		add(PasswordManager.updateIdleTimeOut, PasswordManager.updateIdleTimeOut.getName());
 		add(PasswordManager.updateLoginPassword, PasswordManager.updateLoginPassword.getName());
+		add(PasswordManager.FORGOT_PASSWORD, PasswordManager.FORGOT_PASSWORD.getName());
 	}
 }

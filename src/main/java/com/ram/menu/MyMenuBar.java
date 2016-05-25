@@ -36,6 +36,10 @@ public class MyMenuBar extends JFrame{
 	      changeSecurityKey.setMnemonic(KeyEvent.VK_E);
 	      changeSecurityKey.setToolTipText("Change SecutrityKey");
 	      
+	      JMenuItem forgotPassword = new JMenuItem("Forgot Password", icon);
+	      changeSecurityKey.setMnemonic(KeyEvent.VK_E);
+	      changeSecurityKey.setToolTipText("Forgot Password");
+	      
 	      JMenuItem changeIdleTimeOut = new JMenuItem("Change Idle TimeOut", icon);
 	      changeIdleTimeOut.setMnemonic(KeyEvent.VK_E);
 	      changeIdleTimeOut.setToolTipText("Change Idle TimeOut");
@@ -51,6 +55,17 @@ public class MyMenuBar extends JFrame{
 			}
 		});
 	      
+	      forgotPassword.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+//					JOptionPane.showMessageDialog(null, "Successfully Register");
+					cardLayout = (CardLayout)PasswordManager.cards.getLayout();
+					cardLayout.show(PasswordManager.cards,
+							PasswordManager.FORGOT_PASSWORD.getName());
+					
+				}
+			});
+	      
 	      changePassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -65,6 +80,7 @@ public class MyMenuBar extends JFrame{
 	      profileItem.add(changePassword);
 	      profileItem.add(changeSecurityKey);
 	      profileItem.add(changeIdleTimeOut);
+	      profileItem.add(forgotPassword);
 	      
 	      JMenuItem settings = new JMenuItem("Settings", icon);
 	      settings.setMnemonic(KeyEvent.VK_E);

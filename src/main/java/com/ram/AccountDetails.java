@@ -1,7 +1,9 @@
 package com.ram;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -71,7 +73,62 @@ public final class AccountDetails extends JPanel {
 		if (Constants.UPDATE_ACCOUNT_DETAILS.equals(name)) {
 			updateAccountPanel();
 		}
+		if (Constants.FORGOT_PASSWORD.equals(name)) {
+			forgotPassword();
+		}
 
+	}
+
+	private void forgotPassword() {
+		System.out.println("updateIdleTimeOut");
+		JPanel panel = new JPanel(new GridLayout(0, 2, 2, 2));
+		final JTextField userName = new JTextField(15);
+		final JTextField answer_1 = new JTextField(15);
+		final JTextField answer_2 = new JTextField(15);
+		final JButton retrievePassword = new JButton("Retireve Password");
+		final JButton login = new JButton(Constants.LOGIN);
+		panel.add(new JLabel(Constants.USER_NAME_UI));
+		panel.add(userName);
+		panel.add(new JLabel("Security Question 1:"));
+		panel.add(new JLabel(PasswordManager.SEC_QUES_1));
+		panel.add(new JLabel("Security Answer 1:"));
+		panel.add(answer_1);
+		panel.add(new JLabel("Security Question 2:"));
+		panel.add(new JLabel(PasswordManager.SEC_QUES_2));
+		panel.add(new JLabel("Security Answer 2:"));
+		panel.add(answer_2);
+		panel.add(login);
+		panel.add(retrievePassword);
+		
+		retrievePassword.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (PasswordManager.loginUserName.equalsIgnoreCase(userName
+						.getText())
+						&& PasswordManager.SEC_ANS_1.equalsIgnoreCase(answer_1
+								.getText())
+						&& PasswordManager.SEC_ANS_2.equalsIgnoreCase(answer_2
+								.getText())) {
+					JOptionPane.showMessageDialog(null, "Your password is : "+ PasswordManager.loginPassword);
+				} else {
+					JOptionPane.showMessageDialog(null, "Please try again");
+				}
+				
+			}
+		});
+		
+		login.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CardLayout cardLayout = (CardLayout) PasswordManager.cards.getLayout();
+				cardLayout.show(PasswordManager.cards, PasswordManager.loginCard.getName());
+				
+			}
+		});
+		
+		add(panel);
+		
 	}
 
 	private void updateIdleTimeOut() {
@@ -112,7 +169,7 @@ public final class AccountDetails extends JPanel {
 						 idleTimeOut
 						));
 		
-		JButton login = new JButton("Login");
+		JButton login = new JButton(Constants.LOGIN);
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cardLayout = (CardLayout) PasswordManager.cards.getLayout();
@@ -191,6 +248,9 @@ public final class AccountDetails extends JPanel {
 		final JPasswordField password = new JPasswordField(15);
 		final JPasswordField confirmPassword = new JPasswordField(15);
 		final JTextField securityKey = new JTextField(15);
+		final JTextField securityAnswer_1 = new JTextField(15);
+		final JTextField securityAnswer_2 = new JTextField(15);
+		securityKey.setToolTipText("This key will be used to encrypt the data while saving to file");
 		final JTextField idleTimeOut = new JTextField(15);
 		idleTimeOut.setToolTipText("Time is in minutes");
 		idleTimeOut.setText("Time is in minutes");
@@ -208,9 +268,7 @@ public final class AccountDetails extends JPanel {
 		panel.add(timeOut);
 		
 		idleTimeOut.addFocusListener(new FocusListener() {
-			
 			public void focusLost(FocusEvent e) {
-				
 				
 			}
 			
@@ -219,13 +277,46 @@ public final class AccountDetails extends JPanel {
 			}
 		});
 		
+		securityKey.addFocusListener(new FocusListener() {
+			public void focusLost(FocusEvent e) {
+				
+			}
+			
+			public void focusGained(FocusEvent e) {
+				securityKey.setText("");
+			}
+		});
+		
 		panel.add(idleTimeOut);
+		
+		panel.add(new JLabel("Security Question 1 :"));
+
+		final JComboBox<String> SECURITY_QUESTION_LIST_ONE = new JComboBox<String>(
+				Constants.SECURITY_QUESTION_LIST_ONE);
+		SECURITY_QUESTION_LIST_ONE.setSize(20, 10);
+		SECURITY_QUESTION_LIST_ONE.setSelectedIndex(0);
+		panel.add(SECURITY_QUESTION_LIST_ONE);
+		
+		panel.add(new JLabel("Security Answer 1 :"));
+		panel.add(securityAnswer_1);
+		
+		panel.add(new JLabel("Security Question 2 :"));
+
+		final JComboBox<String> SECURITY_QUESTION_LIST_TWO = new JComboBox<String>(
+				Constants.SECURITY_QUESTION_LIST_TWO);
+		SECURITY_QUESTION_LIST_TWO.setSelectedIndex(0);
+		panel.add(SECURITY_QUESTION_LIST_TWO);
+		
+		panel.add(new JLabel("Security Answer 2 :"));
+		panel.add(securityAnswer_2);
+		
 		
 		
 		JButton regiter = new JButton("Register");
 		regiter.addActionListener(new MyRegisterActionListner(jsonArray,
 				userName, password, confirmPassword
-						, securityKey, idleTimeOut
+						, securityKey, idleTimeOut, SECURITY_QUESTION_LIST_ONE, 
+						SECURITY_QUESTION_LIST_TWO, securityAnswer_1, securityAnswer_2
 						));
 		
 		JButton login = new JButton("Login");
