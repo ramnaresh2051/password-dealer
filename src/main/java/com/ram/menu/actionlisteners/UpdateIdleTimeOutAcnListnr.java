@@ -74,6 +74,8 @@ public class UpdateIdleTimeOutAcnListnr implements ActionListener{
 		if (StringUtils.isEmpty(uName) || StringUtils.isEmpty(uPass)
 				|| StringUtils.isEmpty(idle)) {
 			msg = "All fields are Mandatory";
+		} else if (!StringUtils.isNumeric(idle)){
+			msg = "Only numeric allowed for idle time out";
 		}
 
 		if (StringUtils.isNotEmpty(PasswordManager.loginUserName)

@@ -99,6 +99,8 @@ public class MyRegisterActionListner implements ActionListener {
 				|| StringUtils.isEmpty(security)
 				|| StringUtils.isEmpty(idle) || StringUtils.isEmpty(sec_ans1) || StringUtils.isEmpty(sec_ans2)) {
 			msg = "All fields are Mandatory";
+		} else if (!StringUtils.isNumeric(idle)) {
+			msg = "Only numeric allowed for idle time out";
 		}
 
 		if (StringUtils.isNotEmpty(uCpass) && !uCpass.equalsIgnoreCase(uPass)) {
