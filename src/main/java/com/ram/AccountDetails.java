@@ -101,7 +101,6 @@ public final class AccountDetails extends JPanel {
 		panel.add(retrievePassword);
 		
 		retrievePassword.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (PasswordManager.loginUserName.equalsIgnoreCase(userName
 						.getText())
@@ -119,7 +118,6 @@ public final class AccountDetails extends JPanel {
 		
 		login.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cardLayout = (CardLayout) PasswordManager.cards.getLayout();
 				cardLayout.show(PasswordManager.cards, PasswordManager.loginCard.getName());

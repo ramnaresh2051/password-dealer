@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import org.apache.commons.lang.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -142,6 +143,10 @@ public class RetrieveAccountDetailsListener
   
   private List<AccountDetailsFields> getAcctDetailsForUserName(String uName)
   {
+	  
+	  if (!StringUtils.isEmpty(uName))
+		  uName = uName.toLowerCase();
+	  
     List<AccountDetailsFields> list = new ArrayList();
     try
     {
@@ -177,6 +182,10 @@ public class RetrieveAccountDetailsListener
   
   private List<AccountDetailsFields> getAcctDetailsForAcctType(String accountType)
   {
+	  
+	  if (!StringUtils.isEmpty(accountType))
+		  accountType = accountType.toLowerCase();
+	  
     List<AccountDetailsFields> list = new ArrayList();
     try
     {
@@ -189,7 +198,7 @@ public class RetrieveAccountDetailsListener
         if (jsonObject.has(Constants.ACCOUNT_TYPE_BE))
         {
 //          System.out.println("Timing : " + i);
-          if (jsonObject.get(Constants.ACCOUNT_TYPE_BE).toString().contains(accountType)) {
+          if (jsonObject.get(Constants.ACCOUNT_TYPE_BE).toString().toLowerCase().contains(accountType)) {
             shouldAdd = true;
           }
         }
@@ -212,6 +221,11 @@ public class RetrieveAccountDetailsListener
   
   private List<AccountDetailsFields> getAcctDetailsForDescAndUName(String accountDesc, String uName)
   {
+	  if (!StringUtils.isEmpty(accountDesc))
+		  accountDesc = accountDesc.toLowerCase();
+	  if (!StringUtils.isEmpty(uName))
+		  uName = uName.toLowerCase();
+	  
     List<AccountDetailsFields> list = new ArrayList();
     try
     {
@@ -224,8 +238,8 @@ public class RetrieveAccountDetailsListener
         if (jsonObject.has(Constants.ACCOUNT_DESC_BE))
         {
 //          System.out.println("Timing : " + i);
-          if ((jsonObject.get(Constants.ACCOUNT_DESC_BE).toString().contains(accountDesc)) && 
-            (jsonObject.get(Constants.USER_NAME_BE).toString().contains(uName))) {
+          if ((jsonObject.get(Constants.ACCOUNT_DESC_BE).toString().toLowerCase().contains(accountDesc)) && 
+            (jsonObject.get(Constants.USER_NAME_BE).toString().toLowerCase().contains(uName))) {
             shouldAdd = true;
           }
         }
@@ -248,6 +262,9 @@ public class RetrieveAccountDetailsListener
   
   private List<AccountDetailsFields> getAcctDetailsForDesc(String accountDesc)
   {
+	  if (!StringUtils.isEmpty(accountDesc))
+		  accountDesc = accountDesc.toLowerCase();
+	  
     List<AccountDetailsFields> list = new ArrayList();
     try
     {
@@ -260,7 +277,7 @@ public class RetrieveAccountDetailsListener
         if (jsonObject.has(Constants.ACCOUNT_DESC_BE))
         {
 //          System.out.println("Timing : " + i);
-          if (jsonObject.get(Constants.ACCOUNT_DESC_BE).toString().contains(accountDesc)) {
+          if (jsonObject.get(Constants.ACCOUNT_DESC_BE).toString().toLowerCase().contains(accountDesc)) {
             shouldAdd = true;
           }
         }
@@ -283,6 +300,13 @@ public class RetrieveAccountDetailsListener
   
   private List<AccountDetailsFields> getAcctDetailsForTypeAndUName(String accountType, String userName)
   {
+	  
+	  if (!StringUtils.isEmpty(accountType))
+	    	accountType = accountType.toLowerCase();
+	    
+	    if (!StringUtils.isEmpty(userName))
+	    	userName = userName.toLowerCase();
+	    
     List<AccountDetailsFields> list = new ArrayList();
     try
     {
@@ -295,8 +319,8 @@ public class RetrieveAccountDetailsListener
         if (jsonObject.has(Constants.ACCOUNT_TYPE_BE))
         {
 //          System.out.println("Timing : " + i);
-          if ((jsonObject.get(Constants.ACCOUNT_TYPE_BE).toString().contains(accountType)) && 
-            (jsonObject.get(Constants.USER_NAME_BE).toString().contains(userName))) {
+          if ((jsonObject.get(Constants.ACCOUNT_TYPE_BE).toString().toLowerCase().contains(accountType)) && 
+            (jsonObject.get(Constants.USER_NAME_BE).toString().toLowerCase().contains(userName))) {
             shouldAdd = true;
           }
         }
@@ -319,6 +343,13 @@ public class RetrieveAccountDetailsListener
   
   private List<AccountDetailsFields> getAcctDetailsForTypeAndDesc(String accountType, String accountDesc)
   {
+	  
+	  if (!StringUtils.isEmpty(accountType))
+	    	accountType = accountType.toLowerCase();
+	    
+	    if (!StringUtils.isEmpty(accountDesc))
+	    	accountDesc = accountDesc.toLowerCase();
+	    
     List<AccountDetailsFields> list = new ArrayList();
     try
     {
@@ -331,8 +362,8 @@ public class RetrieveAccountDetailsListener
         if (jsonObject.has(Constants.ACCOUNT_TYPE_BE))
         {
 //          System.out.println("Timing : " + i);
-          if ((jsonObject.get(Constants.ACCOUNT_TYPE_BE).toString().contains(accountType)) && 
-            (jsonObject.get(Constants.ACCOUNT_DESC_BE).toString().contains(accountDesc))) {
+          if ((jsonObject.get(Constants.ACCOUNT_TYPE_BE).toString().toLowerCase().contains(accountType)) && 
+            (jsonObject.get(Constants.ACCOUNT_DESC_BE).toString().toLowerCase().contains(accountDesc))) {
             shouldAdd = true;
           }
         }
@@ -355,6 +386,16 @@ public class RetrieveAccountDetailsListener
   
   private List<AccountDetailsFields> getAccountDetailsForThree(String accountType, String accountDesc, String userName)
   {
+	  
+	  if (!StringUtils.isEmpty(accountType))
+	    	accountType = accountType.toLowerCase();
+	    
+	    if (!StringUtils.isEmpty(accountDesc))
+	    	accountDesc = accountDesc.toLowerCase();
+	    
+	    if (!StringUtils.isEmpty(userName))
+	    	userName = userName.toLowerCase();
+	    
     List<AccountDetailsFields> list = new ArrayList();
     try
     {
@@ -367,9 +408,9 @@ public class RetrieveAccountDetailsListener
         if (jsonObject.has(Constants.ACCOUNT_TYPE_BE))
         {
 //          System.out.println("Timing : " + i);
-          if ((jsonObject.get(Constants.ACCOUNT_TYPE_BE).toString().contains(accountType)) && 
-            (jsonObject.get(Constants.ACCOUNT_DESC_BE).toString().contains(accountDesc)) && 
-            (jsonObject.get(Constants.USER_NAME_BE).toString().contains(userName))) {
+          if ((jsonObject.get(Constants.ACCOUNT_TYPE_BE).toString().toLowerCase().contains(accountType)) && 
+            (jsonObject.get(Constants.ACCOUNT_DESC_BE).toString().toLowerCase().contains(accountDesc)) && 
+            (jsonObject.get(Constants.USER_NAME_BE).toString().toLowerCase().contains(userName))) {
             shouldAdd = true;
           }
         }
