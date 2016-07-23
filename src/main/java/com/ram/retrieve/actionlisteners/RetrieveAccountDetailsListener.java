@@ -137,17 +137,17 @@ public class RetrieveAccountDetailsListener
         sb.append("\n");
         i++;
       }
+      JTextArea textArea = new JTextArea(6, 25);
+      textArea.setText(sb.toString());
+      textArea.setEditable(false);
+      JScrollPane scrollPane = new JScrollPane(textArea);
+      JOptionPane.showMessageDialog(null, scrollPane);
+      
     } else {
       sb.append("Please select any option to search");
+      JOptionPane.showMessageDialog(null, sb);
     }
-    
-    JTextArea textArea = new JTextArea(6, 25);
-    textArea.setText(sb.toString());
-    textArea.setEditable(false);
-    
-    JScrollPane scrollPane = new JScrollPane(textArea);
-    
-    JOptionPane.showMessageDialog(null, scrollPane);
+   
   }
   
   private List<AccountDetailsFields> getAcctDetailsForUserName(String uName)
