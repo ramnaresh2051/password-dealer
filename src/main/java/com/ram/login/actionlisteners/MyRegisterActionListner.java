@@ -74,7 +74,7 @@ public class MyRegisterActionListner implements ActionListener {
 					jsonObject.put(Constants.IS_REGISTERED, "true");
 					jsonObject.put(Constants.SEC_QUES_1, sec_ques1);
 					jsonObject.put(Constants.SEC_QUES_2, sec_ques2);
-					jsonObject.put(Constants.SEC_ANS_1, sec_ans2);
+					jsonObject.put(Constants.SEC_ANS_1, sec_ans1);
 					jsonObject.put(Constants.SEC_ANS_2, sec_ans2);
 					jsonArray.put(jsonObject);
 					DBManager.writeIntoFile(jsonArray.toString());

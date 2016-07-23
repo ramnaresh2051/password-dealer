@@ -13,6 +13,8 @@ import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.apache.commons.lang.StringUtils;
@@ -138,7 +140,14 @@ public class RetrieveAccountDetailsListener
     } else {
       sb.append("Please select any option to search");
     }
-    JOptionPane.showMessageDialog(null, sb);
+    
+    JTextArea textArea = new JTextArea(6, 25);
+    textArea.setText(sb.toString());
+    textArea.setEditable(false);
+    
+    JScrollPane scrollPane = new JScrollPane(textArea);
+    
+    JOptionPane.showMessageDialog(null, scrollPane);
   }
   
   private List<AccountDetailsFields> getAcctDetailsForUserName(String uName)
