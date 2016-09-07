@@ -8,6 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.ram.PasswordManager;
+import com.ram.util.Util;
+
 public class DBManager {
   /* Error */
   public static boolean writeIntoFile(String fileData) {
@@ -19,7 +22,7 @@ public class DBManager {
 	try {
 		fout = new FileWriter(file);
 		bout = new BufferedWriter(fout);
-		bout.write(fileData);
+		bout.write(Util.encrypt(fileData));
 		statusFlag = true;
 	} catch(IOException ioe) {
 		ioe.printStackTrace();
@@ -51,10 +54,12 @@ public class DBManager {
       fin = new FileReader(file);
       bin = new BufferedReader(fin);
       String line = null;
+      StringBuilder sb = new StringBuilder();
       stringArray = new ArrayList();
       while ((line = bin.readLine()) != null) {
-        stringArray.add(line);
+    	sb.append(line);
       }
+      stringArray.add(Util.decrypt(sb.toString()));
     } catch (IOException ioe) {
       ioe.printStackTrace();
     } finally {

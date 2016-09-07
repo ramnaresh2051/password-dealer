@@ -5,10 +5,16 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -16,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 
+import org.apache.axis.encoding.Base64;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,51 +39,10 @@ public class Util {
 	
   private static CardLayout cardLayout;	
 	
-  private static MyTree<String> myTree = new MyTree("PasswordManager");
+  private static String STATIC_KEY = "Bar12345Bar12345";
   
-  public static void main(String[] args)
-  {
-    String accountType = "Social";
-    String accountDesc = "SBI";
-    String userName = "ramnaresh_singh";
-    createTree();
-    Collection<MyTree<String>> element = searchElement(accountType, accountDesc, "");
-    for (MyTree<String> tree : element) {
-      System.out.println(tree.toString().contains("facebook"));
-    }
-  }
-  
-  private static Collection<MyTree<String>> searchElement(String accountType, String accountDesc, String userName)
-  {
-    Collection<MyTree<String>> element = new ArrayList();
-    if (userName.isEmpty()) {
-      element = myTree.getTree(accountType).getSubTrees();
-    }
-    return element;
-  }
-  
-  private static void createTree() {
-//    DBManager dbManager = new DBManager();
-//    ArrayList<String> list = DBManager.readFromFile();
-//    System.out.println("List Size :" + list.size());
-//    Iterator<String> listIterator = list.iterator();
-//    int j;
-//    int i;
-//    for (; listIterator.hasNext(); ) {
-//      String[] commaSplit = ((String)listIterator.next()).split(",");
-//      String firstElement = null;
-//      String secondElement = null;
-//      boolean flag = false;
-//      String[] arrayOfString1;
-//      j = (arrayOfString1 = commaSplit).length;i = 0; continue;String element = arrayOfString1[i];
-//      firstElement = secondElement;
-//      secondElement = element.substring(element.indexOf("=") + 1, element.length());
-//      if (flag) {
-//        myTree.addLeaf(firstElement, secondElement);
-//      }
-//      flag = true;i++;
-//    }
-  }
+  static  byte[]  key = "!@#$!@#$%^&**&^%".getBytes();
+	final static String algorithm="AES";
   
   public static JSONArray onStartUp() {
     List<String> list = new ArrayList();
@@ -85,6 +51,8 @@ public class Util {
     if (!list.isEmpty()) {
       try
       {
+//    	String key = decryptData((String)list.get(1));
+//    	System.out.println(key);
         jsonArray = new JSONArray((String)list.get(0));
       }
       catch (JSONException e)
@@ -195,6 +163,75 @@ public class Util {
 				Constants.FORGOT_PASSWORD, new JLabel(
 						"This is card update time out"), MyColor.getCommonColor());
 	}
+	
+	public static String encrypt(String data) {
+
+	    byte[] dataToSend = data.getBytes();
+	    Cipher c = null;
+	    try {
+	        c = Cipher.getInstance(algorithm);
+	    } catch (NoSuchAlgorithmException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    } catch (NoSuchPaddingException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	    SecretKeySpec k =  new SecretKeySpec(key, algorithm);
+	    try {
+	        c.init(Cipher.ENCRYPT_MODE, k);
+	    } catch (InvalidKeyException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	    byte[] encryptedData = "".getBytes();
+	    try {
+	        encryptedData = c.doFinal(dataToSend);
+	    } catch (IllegalBlockSizeException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    } catch (BadPaddingException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	    String encryptedByteValue =    new Base64().encode(encryptedData);
+	    return  new String(encryptedByteValue);//.toString();
+	}
+
+	public static String decrypt(String data){
+
+	    byte[] encryptedData  = new Base64().decode(data);
+	    Cipher c = null;
+	    try {
+	        c = Cipher.getInstance(algorithm);
+	    } catch (NoSuchAlgorithmException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    } catch (NoSuchPaddingException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	    SecretKeySpec k =
+	            new SecretKeySpec(key, algorithm);
+	    try {
+	        c.init(Cipher.DECRYPT_MODE, k);
+	    } catch (InvalidKeyException e1) {
+	        // TODO Auto-generated catch block
+	        e1.printStackTrace();
+	    }
+	    byte[] decrypted = null;
+	    try {
+	        decrypted = c.doFinal(encryptedData);
+	    } catch (IllegalBlockSizeException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    } catch (BadPaddingException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	    return new String(decrypted);
+	}
+	
 }
 
 class MyColor {
