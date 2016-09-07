@@ -69,7 +69,7 @@ public class UpdateAcctTypeListListener
       }
     }
     
-    Collections.sort(list);
+    list.sort(String::compareToIgnoreCase);
     return list;
   }
 }
