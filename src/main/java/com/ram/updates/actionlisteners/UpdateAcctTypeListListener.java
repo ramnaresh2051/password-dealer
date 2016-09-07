@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -67,6 +68,8 @@ public class UpdateAcctTypeListListener
         list.add(jsonObject.get(Constants.ACCOUNT_DESC_BE).toString());
       }
     }
+    
+    Collections.sort(list);
     return list;
   }
 }
